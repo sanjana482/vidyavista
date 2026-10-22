@@ -114,7 +114,13 @@ DATABASES = {
         default="postgresql://vidyavista:2005@127.0.0.1:5432/vidyavista_db",
         conn_max_age=600,
         conn_health_checks=True,
+        ssl_require=not DEBUG,
     )
+}
+
+DATABASES["default"]["OPTIONS"] = {
+    **DATABASES["default"].get("OPTIONS", {}),
+    "options": "-c search_path=public",
 }
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
