@@ -1,0 +1,59 @@
+# Local development: PostgreSQL + Redis + Meilisearch + Django + Celery worker
+#   docker compose up --build        -> API + admin on http://localhost:8000  (admin: /admin/)
+x-django: &django
+  build: .
+  environment: &django-env
+    DJANGO_DEBUG: "true"
+    DJANGO_SECRET_KEY: dev-secret-key
+    DATABASE_URL: postgres://vidyavista:vidyavista@db:5432/vidyavista
+    REDIS_URL: redis://redis:6379/0
+    MEILISEARCH_URL: http://meilisearch:7700
+    MEILISEARCH_API_KEY: dev-master-key
+    CLIENT_URL: http://localhost:3000
+    DJANGO_SUPERUSER_USERNAME: admin
+    DJANGO_SUPERUSER_EMAIL: admin@vidyavista.com
+    DJANGO_SUPERUSER_PASSWORD: ChangeMe@12345
+  volumes:
+    - .:/app
+  depends_on:
+    - db
+    - redis
+    - meilisearch
+  restart: on-failure   # the first start can race the database; it just retries
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vidyavista
+      POSTGRES_PASSWORD: vidyavista
+      POSTGRES_DB: vidyavista
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    ports: ["5432:5432"]
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  meilisearch:
+    image: getmeili/meilisearch:v1.10
+    environment:
+      MEILI_MASTER_KEY: dev-master-key
+      MEILI_ENV: development
+    volumes: ["meili:/meili_data"]
+    ports: ["7700:7700"]
+  web:
+    <<: *django
+    command: >
+      sh -c "python manage.py makemigrations --noinput &&
+             python manage.py migrate --noinput &&
+             python manage.py ensure_superuser &&
+             python manage.py seed_schools &&
+             python manage.py reindex_schools;
+             python manage.py runserver 0.0.0.0:8000"
+    ports: ["8000:8000"]
+  worker:
+    <<: *django
+    command: celery -A config worker -l info
+
+volumes:
+  pgdata:
+  meili:

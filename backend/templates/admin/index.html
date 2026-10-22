@@ -1,0 +1,88 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block coltype %}colM vv-home{% endblock %}
+
+{% block content %}
+{% with v=vv %}
+<section class="vv-hero">
+  <div>
+    <h2>Welcome back, {{ user.get_short_name|default:user.get_username }} 👋</h2>
+    <p>{% if v.enq_new %}You have <b>{{ v.enq_new }} new enquir{{ v.enq_new|pluralize:"y,ies" }}</b> waiting for a call.{% else %}All enquiries are attended. Great work!{% endif %}</p>
+  </div>
+  <div class="vv-hero-actions">
+    <a class="vv-btn-light" href="{% url 'admin:schools_school_add' %}">+ Add School</a>
+    <a class="vv-btn-pink" href="{% url 'admin:enquiries_enquiry_changelist' %}?status__exact=new">View new enquiries</a>
+  </div>
+</section>
+
+<section class="vv-kpis">
+  <a class="vv-kpi" href="{% url 'admin:schools_school_changelist' %}"><span class="vv-ico blue">🏫</span><small>Total schools</small><strong>{{ v.schools.total }}</strong>
+    <em>{{ v.schools.active }} live · {{ v.hidden }} hidden · {{ v.schools.top }} top rated</em></a>
+  <a class="vv-kpi" href="{% url 'admin:enquiries_enquiry_changelist' %}"><span class="vv-ico pink">📨</span><small>Enquiries (7 days)</small><strong>{{ v.last7 }}</strong>
+    <em class="{% if v.delta >= 0 %}up{% else %}down{% endif %}">{% if v.delta >= 0 %}▲{% else %}▼{% endif %} {{ v.delta_abs }}% vs previous week</em></a>
+  <a class="vv-kpi" href="{% url 'admin:enquiries_enquiry_changelist' %}"><span class="vv-ico navy">📅</span><small>Today</small><strong>{{ v.enq_today }}</strong>
+    <em>{{ v.enq_total }} enquiries in total</em></a>
+  <a class="vv-kpi" href="{% url 'admin:enquiries_enquiry_changelist' %}?status__exact=converted"><span class="vv-ico green">🎯</span><small>Conversion</small><strong>{{ v.conversion }}%</strong>
+    <em>{{ v.enq_converted }} converted · {{ v.enq_contacted }} in follow-up</em></a>
+</section>
+
+<section class="vv-grid vv-grid-2-1">
+  <div class="vv-card">
+    <h3>Enquiries trend <small>last 14 days</small></h3>
+    <div class="vv-bars">
+      {% for d in v.daily %}
+      <div class="vv-bar" title="{{ d.label }}: {{ d.n }}"><span class="n">{{ d.n }}</span><i class="{% if d.today %}today{% endif %}" style="height:{{ d.pct }}%"></i><span class="l">{{ d.label }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="vv-card">
+    <h3>Enquiry pipeline</h3>
+    <div class="vv-donut-wrap">
+      <div class="vv-donut" style="background:{{ v.donut }}"><div><b>{{ v.enq_total }}</b><small>enquiries</small></div></div>
+      <ul class="vv-legend">
+        <li><i style="background:#EC0E58"></i>New <b>{{ v.enq_new }}</b></li>
+        <li><i style="background:#0795DC"></i>Contacted <b>{{ v.enq_contacted }}</b></li>
+        <li><i style="background:#059669"></i>Converted <b>{{ v.enq_converted }}</b></li>
+        <li><i style="background:#8896A6"></i>Closed <b>{{ v.enq_closed }}</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="vv-grid vv-grid-3">
+  <div class="vv-card"><h3>Most enquired schools</h3>
+    {% for r in v.top_schools %}<div class="vv-hbar"><div><span>{{ r.label }}</span><b>{{ r.n }}</b></div><p><i class="pink" style="width:{{ r.pct }}%"></i></p></div>{% empty %}<p class="vv-muted">Enquiries will appear here.</p>{% endfor %}
+  </div>
+  <div class="vv-card"><h3>Schools by city</h3>
+    {% for r in v.by_city %}<div class="vv-hbar"><div><span>{{ r.label }}</span><b>{{ r.n }}</b></div><p><i style="width:{{ r.pct }}%"></i></p></div>{% empty %}<p class="vv-muted">No schools yet.</p>{% endfor %}
+  </div>
+  <div class="vv-card"><h3>Boards &amp; types</h3>
+    {% for r in v.by_board %}<div class="vv-hbar"><div><span>{{ r.label }}</span><b>{{ r.n }}</b></div><p><i class="deep" style="width:{{ r.pct }}%"></i></p></div>{% endfor %}
+    <hr>
+    {% for r in v.by_type %}<div class="vv-hbar"><div><span>{{ r.label }}</span><b>{{ r.n }}</b></div><p><i style="width:{{ r.pct }}%"></i></p></div>{% endfor %}
+  </div>
+</section>
+
+<section class="vv-grid vv-grid-2-1">
+  <div class="vv-card"><h3>Recent enquiries <a href="{% url 'admin:enquiries_enquiry_changelist' %}">View all →</a></h3>
+    {% for e in v.recent %}
+    <a class="vv-row" href="{% url 'admin:enquiries_enquiry_change' e.pk %}">
+      <span><b>{{ e.parent_name }}</b> · {{ e.mobile }}<br><small>{{ e.school_name }}{% if e.class_name %} · Class {{ e.class_name }}{% endif %}</small></span>
+      <span class="vv-status {{ e.status }}">{{ e.get_status_display }}</span>
+    </a>
+    {% empty %}<p class="vv-muted">No enquiries yet.</p>{% endfor %}
+  </div>
+  <div class="vv-card"><h3>Needs attention</h3>
+    {% for a in v.attention %}<a class="vv-attn" href="{% url 'admin:schools_school_changelist' %}{{ a.url }}"><b>{{ a.n }}</b><span>{{ a.text }}</span><i>→</i></a>
+    {% empty %}<p class="vv-ok">✅ All listings look complete.</p>{% endfor %}
+    <div class="vv-quick">
+      <a href="{% url 'admin:schools_school_import_csv' %}">⬆ Bulk import</a>
+      <a href="{% url 'admin:enquiries_enquiry_changelist' %}">Enquiries</a>
+    </div>
+  </div>
+</section>
+{% endwith %}
+
+{{ block.super }}
+{% endblock %}

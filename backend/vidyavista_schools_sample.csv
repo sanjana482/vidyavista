@@ -1,0 +1,6 @@
+﻿name,area,city,state,board,grades,type,gender,fee,rating,reviews,photos,facilities,phone,image,image_file,top_rated,is_active
+Demo Sunrise School,Andheri East,Mumbai,Maharashtra,CBSE,Nursery-X,Day,Co-Ed,65000,4.3,120,3,Library|Sports|Smart Classes,PLACEHOLDER-01,https://images.unsplash.com/photo-1580582932707-520aed937b7b,,True,True
+Demo Green Valley Academy,Powai,Mumbai,Maharashtra,ICSE,Nursery-XII,Day,Co-Ed,90000,4.5,95,3,Library|Science Lab|Sports,PLACEHOLDER-02,https://images.unsplash.com/photo-1509062522246-3755977927d7,,True,True
+Demo Bright Future School,Thane West,Thane,Maharashtra,CBSE,Nursery-X,Day,Co-Ed,50000,4.1,68,2,Computer Lab|Library|Transport,PLACEHOLDER-03,https://images.unsplash.com/photo-1562774053-701939374585,,False,True
+Demo Little Steps School,Nerul,Navi Mumbai,Maharashtra,CBSE,Nursery-VIII,Day,Co-Ed,75000,4.2,82,2,Playground|Activity Room|Library,PLACEHOLDER-04,https://images.unsplash.com/photo-1497633762265-9d179a990aa6,,False,True
+Demo Horizon Learning School,Borivali West,Mumbai,Maharashtra,State Board,Nursery-X,Day,Co-Ed,40000,4.0,54,2,Sports|Library|Computer Lab,PLACEHOLDER-05,https://images.unsplash.com/photo-1503676260728-1c00da094a0b,,False,True

@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">Home</a> &rsaquo;
+  <a href="{% url 'admin:schools_school_changelist' %}">Schools</a> &rsaquo; Import CSV
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main" class="vv-import">
+  <div class="vv-grid vv-grid-2-1">
+    <div class="vv-card">
+      <h3>1 · Download the template</h3>
+      <p>Fill one school per row. Separate facilities with <code>|</code> e.g. <code>Transport|Sports|Library</code>.</p>
+      <p><a class="button" href="{% url 'admin:schools_school_import_template' %}">⬇ Download CSV template</a></p>
+      <h3>2 · Upload your file</h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="default" value="Import schools">
+      </form>
+    </div>
+    <div class="vv-card">
+      <h3>Allowed values</h3>
+      <p><b>type</b>: {{ types|join:", " }}</p>
+      <p><b>board</b>: {{ boards|join:", " }}</p>
+      <p><b>gender</b>: {{ genders|join:", " }} (default Co-ed)</p>
+      <p><b>required</b>: name, area, city, state, board, grades, type, fee</p>
+      <p><b>top_rated / is_active</b>: yes / no</p>
+      <p class="vv-muted">Schools with the same name + area + city are skipped.</p>
+    </div>
+  </div>
+
+  {% if result %}
+  <div class="vv-card" style="margin-top:20px">
+    <h3>Import finished</h3>
+    <p><span class="vv-status converted">{{ result.created }} added</span>
+       <span class="vv-status closed">{{ result.skipped|length }} duplicates skipped</span>
+       <span class="vv-status new">{{ result.errors|length }} failed</span></p>
+    {% if result.ignored %}<p class="vv-muted">Ignored unknown columns: {{ result.ignored|join:", " }}</p>{% endif %}
+    {% if result.skipped or result.errors %}
+    <ul>
+      {% for row, msg in result.skipped %}<li>Row {{ row }}: {{ msg }}</li>{% endfor %}
+      {% for row, msg in result.errors %}<li style="color:#C8104F">Row {{ row }}: {{ msg }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    <p><a class="button" href="{% url 'admin:schools_school_changelist' %}">View schools →</a></p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

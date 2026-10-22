@@ -1,0 +1,193 @@
+[
+  {
+    "name": "Maplewood Academy",
+    "area": "Whitefield",
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "board": "CBSE",
+    "grades": "Nursery – XII",
+    "type": "Day",
+    "gender": "Co-ed",
+    "rating": 4.7,
+    "reviews": 128,
+    "fee": 145000,
+    "facilities": [
+      "Transport",
+      "Sports",
+      "Science labs"
+    ],
+    "photos": 8,
+    "topRated": true,
+    "phone": "+910000000001",
+    "image": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "Cedar Grove Public School",
+    "area": "Dwarka",
+    "city": "Delhi",
+    "state": "Delhi",
+    "board": "CBSE",
+    "grades": "Nursery – XII",
+    "type": "Day Boarding",
+    "gender": "Co-ed",
+    "rating": 4.7,
+    "reviews": 96,
+    "fee": 210000,
+    "facilities": [
+      "Science labs",
+      "Library",
+      "Hostel"
+    ],
+    "photos": 12,
+    "topRated": true,
+    "phone": "+910000000002",
+    "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "Greenfield Public School",
+    "area": "Kandivali",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "board": "CBSE",
+    "grades": "Nursery – XII",
+    "type": "Day",
+    "gender": "Co-ed",
+    "rating": 4.6,
+    "reviews": 103,
+    "fee": 48000,
+    "facilities": [
+      "Transport",
+      "Library",
+      "Computer lab"
+    ],
+    "photos": 5,
+    "phone": "+910000000003",
+    "image": "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "Sunrise International School",
+    "area": "Powai",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "board": "ICSE",
+    "grades": "Nursery – X",
+    "type": "Day",
+    "gender": "Co-ed",
+    "rating": 4.5,
+    "reviews": 76,
+    "fee": 185000,
+    "facilities": [
+      "Science labs",
+      "Sports",
+      "Transport"
+    ],
+    "photos": 8,
+    "phone": "+910000000004",
+    "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "Riverstone International School",
+    "area": "Koregaon Park",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "board": "IB",
+    "grades": "Nursery – XII",
+    "type": "Day Boarding",
+    "gender": "Co-ed",
+    "rating": 4.6,
+    "reviews": 64,
+    "fee": 320000,
+    "facilities": [
+      "Hostel",
+      "Sports",
+      "Library"
+    ],
+    "photos": 10,
+    "phone": "+910000000005",
+    "image": "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "Lotus Valley School",
+    "area": "Gachibowli",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "board": "Cambridge",
+    "grades": "Nursery – XII",
+    "type": "Day",
+    "gender": "Co-ed",
+    "rating": 4.4,
+    "reviews": 58,
+    "fee": 175000,
+    "facilities": [
+      "Transport",
+      "Computer lab",
+      "Sports"
+    ],
+    "photos": 6,
+    "phone": "+910000000006",
+    "image": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "St. Anne's Girls' School",
+    "area": "Adyar",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "board": "State Board",
+    "grades": "I – XII",
+    "type": "Day",
+    "gender": "Girls",
+    "rating": 4.3,
+    "reviews": 41,
+    "fee": 62000,
+    "facilities": [
+      "Library",
+      "Transport",
+      "Science labs"
+    ],
+    "photos": 4,
+    "phone": "+910000000007",
+    "image": "https://images.unsplash.com/photo-1567157577867-8d16e90f1571?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "Hillcrest Boarding School",
+    "area": "Mulshi",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "board": "ICSE",
+    "grades": "V – XII",
+    "type": "Full Boarding",
+    "gender": "Boys",
+    "rating": 4.2,
+    "reviews": 33,
+    "fee": 275000,
+    "facilities": [
+      "Hostel",
+      "Sports",
+      "Library"
+    ],
+    "photos": 9,
+    "phone": "+910000000008",
+    "image": "https://images.unsplash.com/photo-1572445271230-a78b5944a659?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "name": "VSPK International School",
+    "area": "Sector 13, Rohini",
+    "city": "Delhi",
+    "state": "Delhi",
+    "board": "CBSE",
+    "grades": "Nursery – XII",
+    "type": "Day",
+    "gender": "Co-ed",
+    "rating": 0,
+    "reviews": 0,
+    "fee": 160852,
+    "facilities": [
+      "Transport",
+      "Library",
+      "Computer lab"
+    ],
+    "photos": 7,
+    "phone": "01127550204",
+    "image": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=80"
+  }
+]
