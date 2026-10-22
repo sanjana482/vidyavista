@@ -48,12 +48,20 @@ if not SECRET_KEY:
     else:
         raise RuntimeError("DJANGO_SECRET_KEY is required when DJANGO_DEBUG is false")
 
-RAILWAY_DOMAIN = env("RAILWAY_PUBLIC_DOMAIN")
-ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")
+
+ALLOWED_HOSTS = env_list(
+    "DJANGO_ALLOWED_HOSTS",
+    "localhost,127.0.0.1,vidyavista-backend.onrender.com"
+)
+
 CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS")
-if RAILWAY_DOMAIN:
-    ALLOWED_HOSTS.append(RAILWAY_DOMAIN)
-    CSRF_TRUSTED_ORIGINS.append(f"https://{RAILWAY_DOMAIN}")
+
+if "vidyavista-backend.onrender.com" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append("vidyavista-backend.onrender.com")
+
+if "https://vidyavista-backend.onrender.com" not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append("https://vidyavista-backend.onrender.com")
+
 
 ADMIN_PATH = env("DJANGO_ADMIN_PATH", "admin/").lstrip("/")
 if not ADMIN_PATH.endswith("/"):
