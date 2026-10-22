@@ -118,10 +118,7 @@ DATABASES = {
     )
 }
 
-DATABASES["default"]["OPTIONS"] = {
-    **DATABASES["default"].get("OPTIONS", {}),
-    "options": "-c search_path=public",
-}
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ---------- i18n ----------
